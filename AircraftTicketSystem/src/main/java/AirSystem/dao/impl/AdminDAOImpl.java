@@ -49,7 +49,6 @@ public class AdminDAOImpl implements AdminDAO {
         admin.setAge(entity.getInt("Age"));
         admin.setEmail(entity.getStr("Email"));
         admin.setPhone(entity.getStr("Phone"));
-        admin.setJoinTime(entity.getDate("Jointime"));
         return admin;
     }
 }

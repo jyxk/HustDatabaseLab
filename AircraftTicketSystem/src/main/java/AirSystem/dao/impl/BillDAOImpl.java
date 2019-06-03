@@ -29,9 +29,39 @@ public class BillDAOImpl implements BillDAO {
     }
 
     @Override
+    public List<Bill> getBillByUser(int userID) throws SQLException {
+        List<Entity> entityList = Db.use().query("SELECT * FROM Bill WHERE UserID = ?", userID);
+        List<Bill> billList = new ArrayList<>();
+        for (Entity entity : entityList) {
+            billList.add(convertBill(entity));
+        }
+        return billList;
+    }
+
+    @Override
+    public List<Bill> getBillByFlight(int flightID) throws SQLException {
+        List<Entity> entityList = Db.use().query("SELECT * FROM Bill WHERE FlightID = ?", flightID);
+        List<Bill> billList = new ArrayList<>();
+        for (Entity entity : entityList) {
+            billList.add(convertBill(entity));
+        }
+        return billList;
+    }
+
+    @Override
     public int deleteBillById(int id) throws SQLException {
         return Db.use().del(
                 Entity.create("Bill").set("BillID", id)
+        );
+    }
+
+    @Override
+    public int updateBillStatus(Bill bill) throws SQLException {
+
+        return Db.use().update(
+                Entity.create()
+                        .set("UserOption", bill.getOption()),
+                Entity.create("Bill").set("BillID", bill.getBillID())
         );
     }
 

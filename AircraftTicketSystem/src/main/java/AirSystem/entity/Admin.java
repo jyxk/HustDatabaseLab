@@ -13,7 +13,7 @@ public class Admin {
     private int age;
     private String email;
     private String phone;
-    private Date joinTime;
+    private String avatar;
 
     public int getAdminID() {
         return adminID;
@@ -43,8 +43,8 @@ public class Admin {
         return phone;
     }
 
-    public Date getJoinTime() {
-        return joinTime;
+    public String getAvatar() {
+        return avatar;
     }
 
     public void setAdminID(int adminID) {
@@ -75,8 +75,18 @@ public class Admin {
         this.phone = phone;
     }
 
-    public void setJoinTime(Date joinTime) {
-        this.joinTime = joinTime;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + adminID +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", avatar='" + avatar + '\'' +
+                '}';
     }
 }
 

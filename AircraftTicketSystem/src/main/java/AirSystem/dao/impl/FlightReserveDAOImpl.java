@@ -52,6 +52,15 @@ public class FlightReserveDAOImpl implements FlightReserveDAO {
         );
     }
 
+    @Override
+    public int updateTicket(FlightReserve flightReserve) throws SQLException {
+        return Db.use().update(
+                Entity.create()
+                        .set("SeatType", flightReserve.getSeatType()),
+                Entity.create("FlightReserve").set("ReserveID", flightReserve.getReserveID())
+        );
+    }
+
     private FlightReserve convertFlightReserve(Entity entity) {
         FlightReserve flightReserve = new FlightReserve();
         flightReserve.setReserveID(entity.getInt("ReserveID"));

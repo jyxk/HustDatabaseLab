@@ -35,8 +35,39 @@ public class FlightDAOImpl implements FlightDAO {
     }
 
     @Override
+    public List<Flight> getFlightBySrc(String src) throws SQLException {
+        List<Entity> entityList = Db.use().query("SELECT * FROM Flight WHERE SrcStation = ?", src);
+        List<Flight> flightList = new ArrayList<>();
+        for (Entity entity : entityList) {
+            flightList.add(convertFlight(entity));
+        }
+        return flightList;
+    }
+
+    @Override
+    public List<Flight> getFlightByDst(String dst) throws SQLException {
+        List<Entity> entityList = Db.use().query("SELECT * FROM Flight WHERE DstStation = ?", dst);
+        List<Flight> flightList = new ArrayList<>();
+        for (Entity entity : entityList) {
+            flightList.add(convertFlight(entity));
+        }
+        return flightList;
+    }
+
+    @Override
     public int countFlights() throws SQLException {
         return Db.use().queryNumber("SELECT COUNT(*) FROM Flight").intValue();
+    }
+
+    @Override
+    public int updateFlight(Flight flight) throws SQLException {
+
+        return Db.use().update(
+                Entity.create()
+                        .set("BPrice", flight.getBPrice())
+                        .set("EPrice", flight.getEprice()),
+                Entity.create("Flight").set("FlightID", flight.getFlightID())
+        );
     }
 
     @Override

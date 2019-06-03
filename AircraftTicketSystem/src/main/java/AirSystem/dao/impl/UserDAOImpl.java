@@ -39,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
                         .set("Age", user.getAge())
                         .set("Email", user.getEmail())
                         .set("Phone", user.getPhone())
-                        .set("Jointime", user.getJoinTime())
+                        .set("IDcard", user.getIdCard())
         );
     }
 
@@ -50,15 +50,28 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User getUserByUserID(int userID) throws SQLException {
+        Entity entity = Db.use().queryOne("SELECT * FROM UserTable WHERE UserID = ?", userID);
+        return convertUser(entity);
+    }
+
+    @Override
     public int countUsers() throws SQLException {
         return Db.use().queryNumber("SELECT COUNT(*) FROM UserTable").intValue();
     }
 
     @Override
-    public int updateUserPassword(User user) throws SQLException {
+    public int updateUser(User user) throws SQLException {
         return Db.use().update(
-                Entity.create().set("Password", user.getPassword()),
-                Entity.create().set("UserTable", user.getUserID())
+                Entity.create()
+                        .set("Password", user.getPassword())
+                        .set("Username", user.getUsername())
+                        .set("Sex", user.getSex())
+                        .set("IDcard", user.getIdCard())
+                        .set("Email", user.getEmail())
+                        .set("Phone", user.getPhone())
+                        .set("Age", user.getAge()),
+                Entity.create("UserTable").set("UserID", user.getUserID())
         );
     }
 
@@ -70,8 +83,8 @@ public class UserDAOImpl implements UserDAO {
         user.setSex(entity.getStr("Sex"));
         user.setAge(entity.getInt("Age"));
         user.setEmail(entity.getStr("Email"));
-        user.setPassword(entity.getStr("Phone"));
-        user.setJoinTime(entity.getDate("Jointime"));
+        user.setPhone(entity.getStr("Phone"));
+        user.setIdCard(entity.getStr("IDcard"));
         return user;
     }
 }

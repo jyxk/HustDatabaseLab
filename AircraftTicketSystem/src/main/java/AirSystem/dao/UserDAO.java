@@ -15,8 +15,10 @@ public interface UserDAO {
 
     User getUserByUsername(String username) throws SQLException;
 
+    User getUserByUserID(int userID) throws SQLException;
+
     int countUsers() throws SQLException;
 
-    int updateUserPassword(User user) throws SQLException;
+    int updateUser(User user) throws SQLException;
 
 }

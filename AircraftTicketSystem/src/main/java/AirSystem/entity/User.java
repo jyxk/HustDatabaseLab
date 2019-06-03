@@ -12,7 +12,7 @@ public class User {
     private int age;
     private String email;
     private String phone;
-    private Date joinTime;
+    private String idCard;
 
     public int getUserID() {
         return userID;
@@ -70,11 +70,12 @@ public class User {
         this.phone = phone;
     }
 
-    public Date getJoinTime() {
-        return joinTime;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setJoinTime(Date joinTime) {
-        this.joinTime = joinTime;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
+
 }

@@ -16,4 +16,6 @@ public interface FlightReserveDAO {
     int countTickets() throws SQLException;
 
     Long insertTicket(FlightReserve ticket) throws SQLException;
+
+    int updateTicket(FlightReserve flightReserve) throws SQLException;
 }

@@ -13,8 +13,13 @@ public interface FlightDAO {
 
     Flight getFlightById(int id) throws SQLException;
 
+    List<Flight> getFlightBySrc(String src) throws SQLException;
+
+    List<Flight> getFlightByDst(String Dst) throws SQLException;
+
     int countFlights() throws SQLException;
 
     Long insertFlight(Flight flight) throws SQLException;
 
+    int updateFlight(Flight flight) throws SQLException;
 }
